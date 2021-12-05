@@ -13,9 +13,5 @@ class PhotoLoadedState extends PhotoState {
   RoverManifest loadedManifest;
   PhotoLoadedState(@required this.loadedPhoto, this.loadedManifest) : assert(loadedPhoto != null);
 }
- // class PhotoLoadedManifestState extends PhotoState {
- //   RoverManifest loadedManifest;
- //   PhotoLoadedManifestState(@required this.loadedManifest) : assert(loadedManifest != null);
- // }
 
 class ErrorPhotoState extends PhotoState {}
