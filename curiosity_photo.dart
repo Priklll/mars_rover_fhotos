@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_from_the_rover/features/models/rover.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
-import 'package:photo_from_the_rover/features/presentation/page/curiosity/photo_list_curiosity.dart';
-import 'package:photo_from_the_rover/features/presentation/page/curiosity/widget_manifest.dart';
+import 'package:photo_from_the_rover/features/presentation/page/curiosity/photo_list_rover.dart';
+import 'package:photo_from_the_rover/features/presentation/page/curiosity/manifest.dart';
 import 'package:photo_from_the_rover/features/service/repository.dart';
 
 class CuriosityPhoto extends StatelessWidget {

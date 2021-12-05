@@ -17,7 +17,7 @@ class Rover extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
 
-      theme: ThemeData(primaryColor: Colors.red),
+      theme: ThemeData(primaryColor: Colors.red, fontFamily: 'NotoSerif'),
       home: RoverList(),
     );
   }

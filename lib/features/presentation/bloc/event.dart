@@ -1,4 +1,6 @@
 abstract class PhotoEvent{}
 
-class PhotoLoadEvent extends PhotoEvent{}
+class PhotoLoadEvent extends PhotoEvent{
+  PhotoLoadEvent();
+}
 

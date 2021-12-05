@@ -13,6 +13,7 @@ class PhotoCuriosityList extends StatefulWidget {
 }
 
 class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
+
   Widget build(BuildContext context) {
     final PhotoBloc photoBloc = BlocProvider.of<PhotoBloc>(context);
     photoBloc.add(PhotoLoadEvent());

@@ -10,6 +10,7 @@ class PhotoBloc extends Bloc<PhotoEvent, PhotoState> {
   final Repository repository;
 
 
+
   PhotoBloc(@required this.repository)
       : super(PhotoStateEmpty());
 

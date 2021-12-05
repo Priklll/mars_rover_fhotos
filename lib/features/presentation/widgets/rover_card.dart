@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_from_the_rover/features/models/rover.dart';
 import 'package:photo_from_the_rover/features/presentation/page/curiosity/curiosity_photo.dart';
 
 class CuriosityCard extends StatelessWidget {
@@ -6,6 +7,7 @@ class CuriosityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const Rovers opportunityName = Rovers.opportunity;
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 40,
@@ -15,7 +17,7 @@ class CuriosityCard extends StatelessWidget {
             Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (c, a1, a2) => CuriosityPhoto(),
+                  pageBuilder: (c, a1, a2) => const CuriosityPhoto(opportunityName: opportunityName),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: Duration(milliseconds: 800),
@@ -100,7 +102,7 @@ class OpportunityCard extends StatelessWidget {
                   SizedBox(height: 10),
                   Text(
                     'Opportunity',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold ),
                   )
                 ],
               )
