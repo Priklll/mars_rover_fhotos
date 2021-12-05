@@ -1,10 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:photo_from_the_rover/features/presentation/bloc/photo_bloc.dart';
-import 'package:photo_from_the_rover/features/presentation/bloc/photo_event.dart';
-import 'package:photo_from_the_rover/features/presentation/bloc/photo_state.dart';
-import 'package:photo_from_the_rover/features/presentation/widgets/custom_box_dicoration.dart';
-import 'package:photo_from_the_rover/features/service/repository.dart';
+import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
+import 'package:photo_from_the_rover/features/presentation/bloc/event.dart';
+import 'package:photo_from_the_rover/features/presentation/bloc/state.dart';
 
 class PhotoCuriosityList extends StatefulWidget {
   const PhotoCuriosityList({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
       builder: (context, PhotoState state) {
         if (state is PhotoLoadingState) {
           return Container(
-              margin: EdgeInsets.only(top: 250),
+              margin: EdgeInsets.only(top: 10),
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 243, 243, 251),
                 borderRadius: BorderRadius.only(
@@ -33,7 +32,7 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
                       color: Colors.black38, spreadRadius: 10, blurRadius: 30)
                 ],
               ),
-              child: const Center(child: CircularProgressIndicator()));
+              child: const Center(child: CupertinoActivityIndicator()));
         }
 
         if (state is PhotoLoadedState) {
@@ -47,7 +46,7 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
                     color: Colors.black38, spreadRadius: 10, blurRadius: 30)
               ],
             ),
-            margin: EdgeInsets.only(top: 250),
+            margin: EdgeInsets.only(top: 10),
             child: GridView.builder(
               itemCount: state.loadedPhoto.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -80,7 +79,7 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
 
         if (state is ErrorPhotoState) {
           return Container(
-              margin: const EdgeInsets.only(top: 250),
+              margin: const EdgeInsets.only(top: 10),
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 243, 243, 251),
                 borderRadius: BorderRadius.only(

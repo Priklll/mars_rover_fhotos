@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:photo_from_the_rover/features/models/photo.dart';
 import 'package:photo_from_the_rover/features/models/photo_manifest.dart';
+import 'package:photo_from_the_rover/features/models/rover.dart';
 
 class Provider {
   NasaEndpoint _endpoint = NasaEndpoint();
@@ -21,23 +22,13 @@ class Provider {
 
   Future<RoverManifest> getManifest() async {
     final response = await http.get(Uri.parse("https://api.nasa.gov/mars-photos/api/v1/manifests/spirit?api_key=eb0Q4TEg6PKMZTlKogsUBgxQWGHH1SrWEgqfQxP4")
-        // _endpoint.getManifestUri(rover)
+        // final response = await http.get(Uri.parse("${_endpoint.getManifestUri(rover)}")
     );
     if (response.statusCode == 200) {
       final dynamic manifestJson =
           (jsonDecode(response.body) as Map)['photo_manifest'];
       // print(manifestJson);
       RoverManifest manifest = RoverManifest.fromJson(manifestJson);
-      // print(manifest.sol);
-      print(manifest.name);
-      // print(manifest.totalPhotos);
-      // print(manifest.earthDate);
-      // print(manifest.status);
-      // print(manifest.launchDate);
-      // print(manifest.landingDate);
-      // print(manifest.maxDate);
-      // print(manifest.maxSol);
-
       return manifest;
     } else {
       throw Exception("Error");
@@ -49,7 +40,12 @@ class NasaEndpoint {
   String host = 'https://api.nasa.gov/mars-photos/api/v1/';
   String apiKey = 'eb0Q4TEg6PKMZTlKogsUBgxQWGHH1SrWEgqfQxP4';
 
-  Uri getManifestUri(Rover rover) {
+  Uri getManifestUri(Rovers rover) {
     return Uri.parse(host + rover.name + '?api_key=' + apiKey);
   }
+
+  Uri getPhotoToSolUri(Rover rover, int sol){
+    return Uri.parse(host + 'rovers/' + rover.name + '/photos?sol=' + '$sol' + '&api_key=' + apiKey);
+  }
+
 }

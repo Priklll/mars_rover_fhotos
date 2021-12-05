@@ -12,12 +12,12 @@ class Manifest{
 
 class RoverManifest {
   String name;
-  // String landingDate;
-  // String launchDate;
-  // String status;
-  // int maxSol;
-  // String maxDate;
-  // int totalPhotos;
+  String landingDate;
+  String launchDate;
+  String status;
+  int maxSol;
+  String maxDate;
+  int totalPhotos;
   // List<ManifestPhotoData> photo;
   // int sol;
   // String earthDate;
@@ -25,12 +25,12 @@ class RoverManifest {
 
   RoverManifest({
     required this.name,
-    // required this.landingDate,
-    // required this.launchDate,
-    // required this.status,
-    // required this.maxSol,
-    // required this.maxDate,
-    // required this.totalPhotos,
+    required this.landingDate,
+    required this.launchDate,
+    required this.status,
+    required this.maxSol,
+    required this.maxDate,
+    required this.totalPhotos,
     // required this.photo,
     // required this.sol,
     // required this.earthDate,
@@ -40,12 +40,12 @@ class RoverManifest {
   factory RoverManifest.fromJson(Map<String, dynamic> json) {
     return RoverManifest(
         name: json['name'],
-        // landingDate: json['landing_date'],
-        // launchDate: json['launch_date'],
-        // status: json['status'],
-        // maxSol: json['max_sol'],
-        // maxDate: json['max_date'],
-        // totalPhotos: json['total_photos'],
+        landingDate: json['landing_date'],
+        launchDate: json['launch_date'],
+        status: json['status'],
+        maxSol: json['max_sol'],
+        maxDate: json['max_date'],
+        totalPhotos: json['total_photos'],
         // photo: List<ManifestPhotoData>.from(json['photos'].map((x) => ManifestPhotoData.fromJson(x))),
         // sol: json['sol'],
         // earthDate: json['earth_date']
