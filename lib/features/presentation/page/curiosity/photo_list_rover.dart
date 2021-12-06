@@ -8,6 +8,7 @@ import 'package:photo_from_the_rover/features/presentation/bloc/state.dart';
 
 class PhotoCuriosityList extends StatefulWidget {
   final int sol;
+
   const PhotoCuriosityList({Key? key, required this.sol}) : super(key: key);
 
   @override
@@ -15,17 +16,15 @@ class PhotoCuriosityList extends StatefulWidget {
 }
 
 class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
-
-
-
   @override
-  void initState(){
+  void initState() {
     final PhotoBloc photoBloc = BlocProvider.of<PhotoBloc>(context);
     photoBloc.add(PhotoLoadEvent());
     super.initState();
   }
 
   Widget build(BuildContext context) {
+    final PhotoBloc photoBloc = BlocProvider.of<PhotoBloc>(context);
     return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, PhotoState state) {
         if (state is PhotoLoadingState) {
@@ -57,41 +56,54 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
             ),
             margin: EdgeInsets.only(top: 10),
             child: GridView.builder(
-              itemCount: state.loadedPhoto.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: 1,
-                mainAxisSpacing: 1,
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (context, index) => InkWell(
-                  onTap: () { Navigator.of(context).push(MaterialPageRoute(builder: (context) => Scaffold(
-                    body: Center(
-                      child: Hero(
-                        tag: 'image',
-                        child: Image.network(state.loadedPhoto[index].imgSrc.toString()),
+                itemCount: state.loadedPhoto.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: 1,
+                  mainAxisSpacing: 1,
+                  crossAxisCount: 2,
+                ),
+                itemBuilder: (context, index) => InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => Scaffold(
+                                    body: Center(
+                                      widthFactor:
+                                          MediaQuery.of(context).size.width,
+                                      heightFactor:
+                                          MediaQuery.of(context).size.width,
+                                      child: Hero(
+                                        tag: 'image',
+                                        child: Image.network(
+                                          state.loadedPhoto[index].imgSrc
+                                              .toString(),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                        );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(color: Colors.white, width: 2),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black38,
+                                  spreadRadius: 0,
+                                  blurRadius: 20)
+                            ],
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    state.loadedPhoto[index].imgSrc.toString()),
+                                fit: BoxFit.cover)),
+                        // child: Text('${state.loadedManifest.sol.toString()}'),
+                        width: 170,
+                        height: 120,
                       ),
-                    ),
-                  )),); },
-                  child:  Container(
-                margin: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Colors.white, width: 2),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black38,
-                          spreadRadius: 0,
-                          blurRadius: 20)
-                    ],
-                    image: DecorationImage(
-                        image: NetworkImage(
-                            state.loadedPhoto[index].imgSrc.toString()),
-                        fit: BoxFit.cover)),
-                // child: Text('${state.loadedManifest.sol.toString()}'),
-                width: 170,
-                height: 120,
-              ), )
-            ),
+                    )),
           );
         }
 

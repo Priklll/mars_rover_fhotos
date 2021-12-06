@@ -13,5 +13,4 @@ class NasaEndpoint {
   Uri getPhotoToSolUri(Rover rover, int sol){
     return Uri.parse(host + 'rovers/' + rover.name + '/photos?sol=' + '$sol' + '&api_key=' + apiKey);
   }
-
 }

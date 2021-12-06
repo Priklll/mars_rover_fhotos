@@ -23,7 +23,6 @@ class Photos {
       earthData: json['earth_date'],
       rovers: RoverData.fromJson(json['rover']),
       cameras: Camera.fromJson(json['camera']),
-
     );
   }
 }

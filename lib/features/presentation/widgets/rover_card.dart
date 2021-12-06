@@ -32,9 +32,7 @@ class CuriosityCard extends StatelessWidget {
                       width: 130,
                       height: 130,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20)),
+                          borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.black38,
@@ -94,9 +92,7 @@ class OpportunityCard extends StatelessWidget {
                       width: 130,
                       height: 130,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20)),
+                          borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.black38,
@@ -140,8 +136,10 @@ class SpiritCard extends StatelessWidget {
             Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (c, a1, a2) =>
-                      const CuriosityPhoto(rover: Rover.spirit, sol: 1,),
+                  pageBuilder: (c, a1, a2) => const CuriosityPhoto(
+                    rover: Rover.spirit,
+                    sol: 1,
+                  ),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: Duration(milliseconds: 800),
@@ -156,9 +154,7 @@ class SpiritCard extends StatelessWidget {
                       width: 130,
                       height: 130,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomRight: Radius.circular(20)),
+                          borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
                                 color: Colors.black38,

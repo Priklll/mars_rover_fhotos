@@ -10,9 +10,7 @@ class Repository {
 
   Repository(this.rover, this.sol);
 
-
   Future<List<Photos>> getAllPhoto() => _networkService.getPhoto(rover, sol);
 
   Future<RoverManifest> getAllManifest() => _networkService.getManifest(rover);
-
 }

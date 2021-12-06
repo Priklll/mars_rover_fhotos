@@ -1,11 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'features/presentation/page/rover_window.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides ();
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    systemNavigationBarColor: Colors.transparent// transparent status bar
+  ));
   runApp(const Rover());
 
 }
