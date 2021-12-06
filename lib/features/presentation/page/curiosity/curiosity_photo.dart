@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_from_the_rover/features/models/rover.dart';
@@ -7,6 +6,7 @@ import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
 import 'package:photo_from_the_rover/features/presentation/page/curiosity/photo_list_rover.dart';
 import 'package:photo_from_the_rover/features/presentation/page/curiosity/manifest.dart';
 import 'package:photo_from_the_rover/features/service/repository.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
 class CuriosityPhoto extends StatelessWidget {
   final Rovers opportunityName;
@@ -23,31 +23,15 @@ class CuriosityPhoto extends StatelessWidget {
       child: Scaffold(
           floatingActionButton: FloatingActionButton.small(
               onPressed: () =>
-                  showDatePicker(context: context,
-                      builder: (context, child){
-                    return Theme(
-                      data: Theme.of(context).copyWith(
-                        colorScheme: const ColorScheme.light(
-                            primary: Colors.orangeAccent,
-                            // header background color
-                            onPrimary: Colors.black,
-                            // header text color
-                            onSurface: Colors.black,
-                            onBackground: Colors.blueGrey,
-                            background: Colors.blueGrey // body text color
-                        ),
-                        textButtonTheme: TextButtonThemeData(
-                          style: TextButton.styleFrom(
-                            primary: Colors.deepOrange[500], // button text color
-                          ),
-                        ),
-                      ),
-                    child: Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(50)), child: child,),);
-                      },
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(2010),
-                      lastDate: DateTime(2025)
-                  ),
+                 showRoundedDatePicker
+                   ( context: context,
+                   height: 330,
+                   initialDate: DateTime.now(),
+                   firstDate: DateTime(2019),
+                   lastDate: DateTime(2027),
+                   theme: ThemeData.light(),
+                   imageHeader: AssetImage('assets/images/bg.jpg'),
+                   borderRadius: 30,),
               backgroundColor: Color.fromARGB(255, 243, 243, 251),
               child: Icon(Icons.event, color: Colors.black,)
             // Image.asset('assets/icons/calendar_icon.png', scale: 2,),
@@ -79,31 +63,4 @@ class CuriosityPhoto extends StatelessWidget {
   }
 }
 
-// _selectDate(BuildContext context) async {
-//   final DateTime? selected = await showDatePicker(
-//     builder: (context, child) {
-//       return Theme(
-//         data: Theme.of(context).copyWith(
-//           colorScheme: const ColorScheme.light(
-//               primary: Colors.redAccent,
-//               // header background color
-//               onPrimary: Colors.black,
-//               // header text color
-//               onSurface: Colors.black,
-//               onBackground: Colors.blueGrey,
-//               background: Colors.blueGrey // body text color
-//           ),
-//           textButtonTheme: TextButtonThemeData(
-//             style: TextButton.styleFrom(
-//               primary: Colors.red, // button text color
-//             ),
-//           ),
-//         ),
-//         child: child!,
-//       );
-//     },
-//     context: context,
-//     initialDate: DateTime.now(),
-//     firstDate: DateTime(2010),
-//     lastDate: DateTime(2025),
-//   );
+

@@ -55,7 +55,16 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
                 mainAxisSpacing: 1,
                 crossAxisCount: 2,
               ),
-              itemBuilder: (context, index) => Container(
+              itemBuilder: (context, index) => InkWell(
+                  onTap: () { Navigator.of(context).push(MaterialPageRoute(builder: (context) => Scaffold(
+                    body: Center(
+                      child: Hero(
+                        tag: 'image',
+                        child: Image.network(state.loadedPhoto[index].imgSrc.toString()),
+                      ),
+                    ),
+                  )),); },
+                  child:  Container(
                 margin: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -73,7 +82,7 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
                 // child: Text('${state.loadedManifest.sol.toString()}'),
                 width: 170,
                 height: 120,
-              ),
+              ), )
             ),
           );
         }
@@ -109,4 +118,15 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
       },
     );
   }
+
+// void showItemPage(BuildContext context){
+//   Navigator.of(context).push(MaterialPageRoute(builder: (context) => Scaffold(
+//     body: Center(
+//       child: Hero(
+//         tag: 'image',
+//         child: Image.network(state.loadedPhoto[index].imgSrc.toString()),
+//       ),
+//     ),
+//   )),);
+// }
 }
