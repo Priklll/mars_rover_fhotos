@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:photo_from_the_rover/features/presentation/widgets/navigator_bar.dart';
 import 'package:photo_from_the_rover/features/presentation/widgets/rover_card.dart';
 
-class RoverList extends StatelessWidget {
-  const RoverList({Key? key}) : super(key: key);
+class RoverWindow extends StatelessWidget {
+  const RoverWindow({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,12 @@
-abstract class PhotoEvent{}
+import 'package:photo_from_the_rover/features/models/rover.dart';
 
-class PhotoLoadEvent extends PhotoEvent{
+abstract class RoverEvent{}
+
+class PhotoLoadEvent extends RoverEvent{
   PhotoLoadEvent();
+}
+
+class ManifestLoadEvent extends RoverEvent{
+  ManifestLoadEvent();
 }
 

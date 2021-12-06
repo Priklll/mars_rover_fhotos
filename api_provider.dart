@@ -40,11 +40,11 @@ class NasaEndpoint {
   String host = 'https://api.nasa.gov/mars-photos/api/v1/';
   String apiKey = 'eb0Q4TEg6PKMZTlKogsUBgxQWGHH1SrWEgqfQxP4';
 
-  Uri getManifestUri(Rovers rover) {
+  Uri getManifestUri(Rover rover) {
     return Uri.parse(host + rover.name + '?api_key=' + apiKey);
   }
 
-  Uri getPhotoToSolUri(Rover rover, int sol){
+  Uri getPhotoToSolUri(RoverData rover, int sol){
     return Uri.parse(host + 'rovers/' + rover.name + '/photos?sol=' + '$sol' + '&api_key=' + apiKey);
   }
 

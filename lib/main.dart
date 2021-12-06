@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import 'features/presentation/page/list_rover.dart';
+import 'features/presentation/page/rover_window.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides ();
@@ -18,7 +18,7 @@ class Rover extends StatelessWidget {
     return MaterialApp(
 
       theme: ThemeData(primaryColor: Colors.red, fontFamily: 'NotoSerif'),
-      home: RoverList(),
+      home: RoverWindow(),
     );
   }
 }

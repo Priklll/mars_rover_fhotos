@@ -3,7 +3,7 @@ class Photos {
   int sol;
   String imgSrc;
   String earthData;
-  Rover rovers;
+  RoverData rovers;
   Camera cameras;
 
   Photos({
@@ -21,7 +21,7 @@ class Photos {
       sol: json['sol'],
       id: json['id'],
       earthData: json['earth_date'],
-      rovers: Rover.fromJson(json['rover']),
+      rovers: RoverData.fromJson(json['rover']),
       cameras: Camera.fromJson(json['camera']),
 
     );
@@ -51,14 +51,14 @@ class Camera {
   }
 }
 
-class Rover {
+class RoverData {
   int id;
   String name;
   String landingDate;
   String launchDate;
   String status;
 
-  Rover({
+  RoverData({
     required this.id,
     required this.name,
     required this.landingDate,
@@ -66,8 +66,8 @@ class Rover {
     required this.status,
   });
 
-  factory Rover.fromJson(Map<String, dynamic> json) {
-    return Rover(
+  factory RoverData.fromJson(Map<String, dynamic> json) {
+    return RoverData(
         id: json['id'],
         name: json['name'],
         landingDate: json['landing_date'],

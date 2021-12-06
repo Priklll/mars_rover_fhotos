@@ -1,13 +1,18 @@
 import 'package:photo_from_the_rover/features/models/photo.dart';
 import 'package:photo_from_the_rover/features/models/photo_manifest.dart';
-import 'package:photo_from_the_rover/features/service/api_provider.dart';
+import 'package:photo_from_the_rover/features/models/rover.dart';
+import 'package:photo_from_the_rover/features/service/network_service.dart';
 
-class Repository{
+class Repository {
+  final int sol;
+  final Rover rover;
+  final NetworkService _networkService = NetworkService();
 
-  final Provider _photoProvider = Provider();
-  Future<List<Photos>> getAllPhoto() => _photoProvider.getPhoto();
+  Repository(this.rover, this.sol);
 
-  final Provider _manifestProvider = Provider();
-  Future<RoverManifest> getAllManifest() => _manifestProvider.getManifest();
+
+  Future<List<Photos>> getAllPhoto() => _networkService.getPhoto(rover, sol);
+
+  Future<RoverManifest> getAllManifest() => _networkService.getManifest(rover);
 
 }

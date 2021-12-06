@@ -1,15 +1,15 @@
-enum Rovers {
+enum Rover {
   spirit,
   curiosity,
   opportunity
 }
 
-extension RoverExtention on Rovers {
+extension RoverExtention on Rover {
   String get name{
     switch (this){
-      case Rovers.opportunity : return 'opportunity';
-      case Rovers.curiosity : return 'curiosity';
-      case Rovers.spirit : return 'spirit';
+      case Rover.opportunity : return 'opportunity';
+      case Rover.curiosity : return 'curiosity';
+      case Rover.spirit : return 'spirit';
     }
   }
 }

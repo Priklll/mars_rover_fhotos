@@ -1,12 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:photo_from_the_rover/features/models/rover.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/event.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/state.dart';
 
 class PhotoCuriosityList extends StatefulWidget {
-  const PhotoCuriosityList({Key? key}) : super(key: key);
+  final int sol;
+  const PhotoCuriosityList({Key? key, required this.sol}) : super(key: key);
 
   @override
   _PhotoCuriosityListState createState() => _PhotoCuriosityListState();
@@ -14,15 +16,21 @@ class PhotoCuriosityList extends StatefulWidget {
 
 class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
 
-  Widget build(BuildContext context) {
+
+
+  @override
+  void initState(){
     final PhotoBloc photoBloc = BlocProvider.of<PhotoBloc>(context);
     photoBloc.add(PhotoLoadEvent());
+    super.initState();
+  }
 
+  Widget build(BuildContext context) {
     return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, PhotoState state) {
         if (state is PhotoLoadingState) {
           return Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 40),
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 243, 243, 251),
                 borderRadius: BorderRadius.only(
@@ -89,7 +97,7 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
 
         if (state is ErrorPhotoState) {
           return Container(
-              margin: const EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 40),
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 243, 243, 251),
                 borderRadius: BorderRadius.only(
@@ -118,15 +126,4 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
       },
     );
   }
-
-// void showItemPage(BuildContext context){
-//   Navigator.of(context).push(MaterialPageRoute(builder: (context) => Scaffold(
-//     body: Center(
-//       child: Hero(
-//         tag: 'image',
-//         child: Image.network(state.loadedPhoto[index].imgSrc.toString()),
-//       ),
-//     ),
-//   )),);
-// }
 }

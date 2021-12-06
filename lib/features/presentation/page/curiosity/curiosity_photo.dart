@@ -9,38 +9,46 @@ import 'package:photo_from_the_rover/features/service/repository.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 
 class CuriosityPhoto extends StatelessWidget {
-  final Rovers opportunityName;
+  final Rover rover;
+  final int sol;
 
-  const CuriosityPhoto({Key? key, required this.opportunityName})
+  const CuriosityPhoto({Key? key, required this.rover, required this.sol})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Repository photoRepository = Repository();
+    Repository photoRepository = Repository(rover, sol);
 
     return BlocProvider<PhotoBloc>(
-      create: (context) => PhotoBloc(photoRepository),
+      create: (context) => PhotoBloc(photoRepository, rover),
       child: Scaffold(
           floatingActionButton: FloatingActionButton.small(
-              onPressed: () =>
-                 showRoundedDatePicker
-                   ( context: context,
-                   height: 330,
-                   initialDate: DateTime.now(),
-                   firstDate: DateTime(2019),
-                   lastDate: DateTime(2027),
-                   theme: ThemeData.light(),
-                   imageHeader: AssetImage('assets/images/bg.jpg'),
-                   borderRadius: 30,),
+              onPressed: () => showRoundedDatePicker(
+                    context: context,
+                    height: 330,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2019),
+                    lastDate: DateTime(2027),
+                    theme: ThemeData.dark(),
+                    imageHeader: AssetImage('assets/images/bg.jpg'),
+                    borderRadius: 30,
+                  ),
               backgroundColor: Color.fromARGB(255, 243, 243, 251),
-              child: Icon(Icons.event, color: Colors.black,)
-            // Image.asset('assets/icons/calendar_icon.png', scale: 2,),
-          ),
+              child: Icon(
+                Icons.event,
+                color: Colors.black,
+              )
+              // Image.asset('assets/icons/calendar_icon.png', scale: 2,),
+              ),
           floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
           body: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/curiosity.jpg'),
+                      image: rover == Rover.curiosity
+                          ? AssetImage('assets/images/curiosity_bg.png')
+                          : rover == Rover.opportunity
+                              ? AssetImage('assets/images/opportunity_bg.jpg')
+                              : AssetImage('assets/images/spirit_bg.jpg'),
                       fit: BoxFit.cover)),
               child: Container(
                 child: Column(
@@ -53,7 +61,7 @@ class CuriosityPhoto extends StatelessWidget {
                       height: 30,
                     ),
                     Expanded(
-                      child: PhotoCuriosityList(),
+                      child: PhotoCuriosityList(sol: sol),
                       flex: 2,
                     )
                   ],
@@ -62,5 +70,3 @@ class CuriosityPhoto extends StatelessWidget {
     );
   }
 }
-
-
