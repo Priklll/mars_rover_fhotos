@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:photo_from_the_rover/features/models/photo_manifest.dart';
 import 'package:photo_from_the_rover/features/models/rover.dart';
 import 'package:photo_from_the_rover/features/presentation/page/curiosity/curiosity_photo.dart';
 
@@ -17,7 +18,7 @@ class CuriosityCard extends StatelessWidget {
                 context,
                 PageRouteBuilder(
                   pageBuilder: (c, a1, a2) =>
-                      const CuriosityPhoto(rover: Rover.curiosity, sol: 1),
+                      const CuriosityPhoto(rover: Rover.curiosity, sol: 1000),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: Duration(milliseconds: 800),
@@ -77,7 +78,7 @@ class OpportunityCard extends StatelessWidget {
                 context,
                 PageRouteBuilder(
                   pageBuilder: (c, a1, a2) =>
-                      const CuriosityPhoto(rover: Rover.opportunity, sol: 1),
+                      const CuriosityPhoto(rover: Rover.opportunity, sol: 1000),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: Duration(milliseconds: 800),
@@ -138,7 +139,7 @@ class SpiritCard extends StatelessWidget {
                 PageRouteBuilder(
                   pageBuilder: (c, a1, a2) => const CuriosityPhoto(
                     rover: Rover.spirit,
-                    sol: 1,
+                    sol: 1000,
                   ),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),

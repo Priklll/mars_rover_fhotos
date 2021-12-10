@@ -2,19 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
+import 'package:photo_from_the_rover/features/presentation/bloc/event.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/state.dart';
 
-class ManifestWidget extends StatefulWidget {
+class ManifestWidget extends StatelessWidget {
   const ManifestWidget({Key? key}) : super(key: key);
 
-  @override
-  _ManifestWidgetState createState() => _ManifestWidgetState();
-}
-
-class _ManifestWidgetState extends State<ManifestWidget> {
-  @override
+   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PhotoBloc, PhotoState>(
+      return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, PhotoState state) {
         if (state is PhotoLoadedState) {
           return Container(

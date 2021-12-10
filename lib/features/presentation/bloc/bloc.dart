@@ -17,14 +17,15 @@ class PhotoBloc extends Bloc<RoverEvent, PhotoState> {
     if (event is PhotoLoadEvent) {
       yield PhotoLoadingState();
       try {
-        final List<Photos> _loadedPhotoList = await repository.getAllPhoto();
         final RoverManifest _loadedManifestList =
-            await repository.getAllManifest();
+        await repository.getAllManifest();
+        final List<Photos> _loadedPhotoList = await repository.getAllPhoto();
         yield PhotoLoadedState(_loadedPhotoList, _loadedManifestList);
+        print('photo');
       } catch (error) {
         print(error);
         yield ErrorPhotoState();
       }
-    }
-  }
-}
+   }
+}}
+
