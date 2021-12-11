@@ -1,20 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:photo_from_the_rover/features/models/photo.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/event.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/state.dart';
 
-class PhotoCuriosityList extends StatelessWidget {
+class PhotoCuriosityList extends StatefulWidget {
   int sol;
 
-  PhotoCuriosityList({Key? key, required this.sol}) : super(key: key);
+  PhotoCuriosityList({Key? key, required this.sol, }) : super(key: key);
 
   @override
+  State<PhotoCuriosityList> createState() => _PhotoCuriosityListState();
+}
+
+class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
+  @override
   Widget build(BuildContext context) {
-    final PhotoBloc photoBloc = BlocProvider.of<PhotoBloc>(context);
-    photoBloc.add(PhotoLoadEvent());
+    // final PhotoBloc photoBloc = BlocProvider.of<PhotoBloc>(context);
+    // photoBloc.add(PhotoLoadEvent());
     return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, PhotoState state) {
         if (state is PhotoLoadingState) {
@@ -101,13 +107,13 @@ class ItemBuilder extends StatelessWidget {
           MaterialPageRoute(
               builder: (context) => Scaffold(
                     body: Center(
-                      widthFactor: MediaQuery.of(context).size.width,
-                      heightFactor: MediaQuery.of(context).size.width,
+                      // widthFactor: MediaQuery.of(context).size.width,
+                      // heightFactor: MediaQuery.of(context).size.width,
                       child: Hero(
                         tag: 'image',
                         child: Image.network(
                           loadedPhoto.imgSrc.toString(),
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
