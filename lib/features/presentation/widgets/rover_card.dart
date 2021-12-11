@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:photo_from_the_rover/features/models/photo_manifest.dart';
 import 'package:photo_from_the_rover/features/models/rover.dart';
-import 'package:photo_from_the_rover/features/presentation/page/curiosity/curiosity_photo.dart';
+import 'package:photo_from_the_rover/features/presentation/page/rover_photo/photo_window.dart';
 
 class CuriosityCard extends StatelessWidget {
   const CuriosityCard({Key? key}) : super(key: key);
@@ -11,7 +10,7 @@ class CuriosityCard extends StatelessWidget {
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 40,
-        color: Color.fromARGB(255, 243, 243, 251),
+        color: const Color.fromARGB(255, 243, 243, 251),
         child: InkWell(
           onTap: () {
             Navigator.push(
@@ -24,7 +23,7 @@ class CuriosityCard extends StatelessWidget {
                   transitionDuration: Duration(milliseconds: 800),
                 ));
           },
-          child: Container(
+          child: SizedBox(
               width: 327,
               height: 130,
               child: Row(
@@ -34,21 +33,21 @@ class CuriosityCard extends StatelessWidget {
                       height: 130,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                                 color: Colors.black38,
                                 spreadRadius: 10,
                                 blurRadius: 30)
                           ],
                           border: Border.all(color: Colors.white),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                               fit: BoxFit.cover,
                               image:
                                   AssetImage('assets/images/curiosity.jpg')))),
-                  SizedBox(width: 30),
+                  const SizedBox(width: 30),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
+                    children: const <Widget>[
                       SizedBox(height: 10),
                       Text(
                         'Curiosity',
@@ -71,7 +70,7 @@ class OpportunityCard extends StatelessWidget {
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 40,
-        color: Color.fromARGB(255, 243, 243, 251),
+        color: const Color.fromARGB(255, 243, 243, 251),
         child: InkWell(
           onTap: () {
             Navigator.push(
@@ -81,10 +80,10 @@ class OpportunityCard extends StatelessWidget {
                       const CuriosityPhoto(rover: Rover.opportunity, sol: 1000),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
-                  transitionDuration: Duration(milliseconds: 800),
+                  transitionDuration: const Duration(milliseconds: 800),
                 ));
           },
-          child: Container(
+          child: SizedBox(
               width: 327,
               height: 130,
               child: Row(
@@ -94,21 +93,21 @@ class OpportunityCard extends StatelessWidget {
                       height: 130,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                                 color: Colors.black38,
                                 spreadRadius: 10,
                                 blurRadius: 30)
                           ],
                           border: Border.all(color: Colors.white),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                               fit: BoxFit.cover,
                               image: AssetImage(
                                   'assets/images/opportunity.jpg')))),
-                  SizedBox(width: 30),
+                  const SizedBox(width: 30),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
+                    children: const <Widget>[
                       SizedBox(height: 10),
                       Text(
                         'Opportunity',
@@ -131,7 +130,7 @@ class SpiritCard extends StatelessWidget {
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 70,
-        color: Color.fromARGB(255, 243, 243, 251),
+        color: const Color.fromARGB(255, 243, 243, 251),
         child: InkWell(
           onTap: () {
             Navigator.push(
@@ -143,10 +142,10 @@ class SpiritCard extends StatelessWidget {
                   ),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
-                  transitionDuration: Duration(milliseconds: 800),
+                  transitionDuration: const Duration(milliseconds: 800),
                 ));
           },
-          child: Container(
+          child: SizedBox(
               width: 327,
               height: 130,
               child: Row(
@@ -156,20 +155,20 @@ class SpiritCard extends StatelessWidget {
                       height: 130,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                                 color: Colors.black38,
                                 spreadRadius: 10,
                                 blurRadius: 30)
                           ],
                           border: Border.all(color: Colors.white),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                               fit: BoxFit.cover,
                               image: AssetImage('assets/images/spirit.jpg')))),
-                  SizedBox(width: 30),
+                  const SizedBox(width: 30),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
+                    children: const <Widget>[
                       SizedBox(height: 10),
                       Text(
                         'Spirit',

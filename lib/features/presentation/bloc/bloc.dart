@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_from_the_rover/features/models/photo.dart';
 import 'package:photo_from_the_rover/features/models/photo_manifest.dart';
@@ -11,23 +10,28 @@ class PhotoBloc extends Bloc<RoverEvent, PhotoState> {
   final Repository repository;
   final Rover rover;
 
+  PhotoBloc(this.repository, this.rover) : super(PhotoStateEmpty());
 
-  PhotoBloc(@required this.repository, this.rover) : super(PhotoStateEmpty());
-
+  @override
   Stream<PhotoState> mapEventToState(RoverEvent event) async* {
     if (event is PhotoLoadEvent) {
       yield PhotoLoadingState();
       try {
-        final RoverManifest _loadedManifestList = await repository.getAllManifest();
-
-        final List<Photos> _loadedPhotoList = await repository.getAllPhoto();
-
-        yield PhotoLoadedState(_loadedPhotoList, _loadedManifestList);
-        print('photo');
+        final RoverManifest _loadedManifestList =
+            await repository.getAllManifest();
+        yield ManifestLoadedState(_loadedManifestList);
       } catch (error) {
         print(error);
         yield ErrorPhotoState();
       }
-   }
-}}
 
+      try {
+        final RoverManifest _loadedManifestList =
+            await repository.getAllManifest();
+        final List<Photos> _loadedPhotoList = await repository.getAllPhoto();
+        yield ManifestAndPhotoLoadedState(
+            _loadedPhotoList, _loadedManifestList);
+      } catch (error) {}
+    }
+  }
+}

@@ -13,14 +13,14 @@ class RoverWindow extends StatelessWidget {
         bottomNavigationBar: NavBar(),
         backgroundColor: Colors.transparent,
         body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage('assets/images/bg.jpg'),
                   fit: BoxFit.cover)),
           child: Center(
               child: ListView(
-                  padding: EdgeInsets.fromLTRB(24, 140, 24, 50),
-                  children: <Widget>[
+                  padding: const EdgeInsets.fromLTRB(24, 140, 24, 50),
+                  children: const <Widget>[
                 CuriosityCard(),
                 SizedBox(
                   height: 31,

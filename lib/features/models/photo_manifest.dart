@@ -1,13 +1,3 @@
-class Manifest {
-  RoverManifest manifest;
-
-  Manifest({required this.manifest});
-
-  factory Manifest.fromJson(Map<String, dynamic> json) {
-    return Manifest(manifest: RoverManifest.fromJson(json['photo_manifest']));
-  }
-}
-
 class RoverManifest {
   String name;
   String landingDate;
@@ -16,10 +6,7 @@ class RoverManifest {
   int maxSol;
   String maxDate;
   int totalPhotos;
-
-  // List<ManifestPhotoData> photo;
-  // int sol;
-  // String earthDate;
+  List<ManifestPhotoData> photo;
 
   RoverManifest({
     required this.name,
@@ -29,9 +16,7 @@ class RoverManifest {
     required this.maxSol,
     required this.maxDate,
     required this.totalPhotos,
-    // required this.photo,
-    // required this.sol,
-    // required this.earthDate,
+    required this.photo,
   });
 
   factory RoverManifest.fromJson(Map<String, dynamic> json) {
@@ -43,9 +28,8 @@ class RoverManifest {
       maxSol: json['max_sol'],
       maxDate: json['max_date'],
       totalPhotos: json['total_photos'],
-      // photo: List<ManifestPhotoData>.from(json['photos'].map((x) => ManifestPhotoData.fromJson(x))),
-      // sol: json['sol'],
-      // earthDate: json['earth_date']
+      photo: List<ManifestPhotoData>.from(
+          json['photos'].map((x) => ManifestPhotoData.fromJson(x))),
     );
   }
 }
@@ -54,7 +38,7 @@ class ManifestPhotoData {
   int sol;
   String earthDate;
   int totalPhotos;
-  List<Camera> camera;
+  List<dynamic> camera;
 
   ManifestPhotoData(
       {required this.sol,
@@ -67,17 +51,17 @@ class ManifestPhotoData {
       sol: json['sol'],
       earthDate: json['earth_date'],
       totalPhotos: json['total_photos'],
-      camera: List<Camera>.from(json["cameras"].map((x) => Camera.fromJson(x))),
+      camera: json["cameras"],
     );
   }
 }
 
-class Camera {
-  String cameras;
-
-  Camera({required this.cameras});
-
-  factory Camera.fromJson(Map<String, dynamic> json) {
-    return Camera(cameras: json['cameras']);
-  }
-}
+// class Camera {
+//   List<String> cameras;
+//
+//   Camera({required this.cameras});
+//
+//   factory Camera.fromJson(Map<String, dynamic> json) {
+//     return Camera(cameras: json['cameras']);
+//   }
+// }

@@ -28,8 +28,8 @@ class NetworkService {
       final dynamic manifestJson =
           (jsonDecode(response.body) as Map)['photo_manifest'];
       print(manifestJson);
-      RoverManifest manifest = RoverManifest.fromJson(manifestJson);
-      return manifest;
+      // RoverManifest manifest = RoverManifest.fromJson(manifestJson);
+      return RoverManifest.fromJson(manifestJson);
     } else {
       throw Exception("Error");
     }
