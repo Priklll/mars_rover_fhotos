@@ -61,6 +61,30 @@ class ManifestW extends StatelessWidget {
 
   const ManifestW({Key? key, required this.loadedManifest}) : super(key: key);
 
+
+
+  Future<void> _selectDate(BuildContext context) async {
+    DateTime selectedDate = DateTime.parse(loadedManifest.maxDate);
+    final DateTime? picked = await  showRoundedDatePicker(
+      context: context,
+      height: 330,
+      initialDate: DateTime.parse(loadedManifest.maxDate),
+      firstDate: DateTime.parse(loadedManifest.landingDate),
+      lastDate: DateTime.parse(loadedManifest.maxDate),
+      theme: ThemeData.light(),
+      imageHeader: const AssetImage('assets/images/bg.jpg'),
+      borderRadius: 30,
+      listDateDisabled: getDates(loadedManifest.photos),
+    ) ;
+    if (picked != null && picked != selectedDate) {
+      selectedDate = picked;
+      print("Selected date: $selectedDate");
+    }
+
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -68,16 +92,7 @@ class ManifestW extends StatelessWidget {
         padding: const EdgeInsets.only(left: 275),
         child: ElevatedButton(
           onPressed: () {
-            showRoundedDatePicker(
-              context: context,
-              height: 330,
-              initialDate: DateTime.parse(loadedManifest.maxDate),
-              firstDate: DateTime.parse(loadedManifest.landingDate),
-              lastDate: DateTime.parse(loadedManifest.maxDate),
-              theme: ThemeData.light(),
-              imageHeader: const AssetImage('assets/images/bg.jpg'),
-              borderRadius: 30,
-            );
+           _selectDate(context);
           },
           style: ElevatedButton.styleFrom(
               primary: const Color.fromARGB(255, 243, 243, 251),
@@ -158,6 +173,31 @@ class ManifestW extends StatelessWidget {
       )
     ]);
   }
+
+  List<DateTime> getDates(List<ManifestPhotoData> photos) {
+    final photosDates =
+        photos.map((photo) => DateTime.parse(photo.earthDate)).toList();
+    List<DateTime> _dates = [];
+    DateTime date = photosDates.first;
+    while (date != photosDates.last) {
+      if (!photosDates.contains(date)) {
+        _dates.add(date);
+      }
+      date = DateTime(date.year, date.month, date.day + 1);
+    }
+    print(_dates.length);
+    return _dates;
+
+    // final difference = photosDates.last.difference(photosDates.first).inDays;
+    // for (int i = 0; i < difference; i++) {
+    //  DateTime date2 = DateTime(date.year, date.month, date.day + i);
+    //   if (!photosDates.contains(date2)) {
+    //
+    //     _dates.add(date2);
+    //   }
+    // }
+    // print(_dates.length);
+  }
 }
 
 class ManifestLoadIndicator extends StatelessWidget {
@@ -214,3 +254,4 @@ class ManifestLoadIndicator extends StatelessWidget {
         ));
   }
 }
+

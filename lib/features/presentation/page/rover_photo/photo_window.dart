@@ -10,14 +10,14 @@ import 'package:photo_from_the_rover/features/service/repository.dart';
 
 class CuriosityPhoto extends StatelessWidget {
   final Rover rover;
-  final int sol;
+  final String earthDate;
 
-  const CuriosityPhoto({Key? key, required this.rover, required this.sol})
+  const CuriosityPhoto({Key? key, required this.rover, required this.earthDate})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Repository photoRepository = Repository(rover, sol);
+    Repository photoRepository = Repository(rover, earthDate);
     final PhotoBloc photoBloc = PhotoBloc(photoRepository, rover);
     photoBloc.add(PhotoLoadEvent());
 
@@ -41,7 +41,7 @@ class CuriosityPhoto extends StatelessWidget {
                   ),
                   const Expanded(child: ManifestWidget(), flex: 1),
                   Expanded(
-                    child: PhotoCuriosityList(sol: sol),
+                    child: PhotoCuriosityList(earthDate: earthDate),
                     flex: 3,
                   )
                 ],

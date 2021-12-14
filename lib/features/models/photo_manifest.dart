@@ -6,7 +6,7 @@ class RoverManifest {
   int maxSol;
   String maxDate;
   int totalPhotos;
-  List<ManifestPhotoData> photo;
+  List<ManifestPhotoData> photos;
 
   RoverManifest({
     required this.name,
@@ -16,7 +16,7 @@ class RoverManifest {
     required this.maxSol,
     required this.maxDate,
     required this.totalPhotos,
-    required this.photo,
+    required this.photos,
   });
 
   factory RoverManifest.fromJson(Map<String, dynamic> json) {
@@ -28,7 +28,7 @@ class RoverManifest {
       maxSol: json['max_sol'],
       maxDate: json['max_date'],
       totalPhotos: json['total_photos'],
-      photo: List<ManifestPhotoData>.from(
+      photos: List<ManifestPhotoData>.from(
           json['photos'].map((x) => ManifestPhotoData.fromJson(x))),
     );
   }
