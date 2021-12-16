@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:photo_from_the_rover/features/models/photo.dart';
 import 'package:photo_from_the_rover/features/models/rover.dart';
 import 'package:photo_from_the_rover/features/presentation/page/rover_photo/photo_window.dart';
 
 class CuriosityCard extends StatelessWidget {
-    const CuriosityCard({Key? key}) : super(key: key);
+
+  const CuriosityCard({Key? key}) : super(key: key);
 
 
   @override
@@ -18,7 +20,7 @@ class CuriosityCard extends StatelessWidget {
                 context,
                 PageRouteBuilder(
                   pageBuilder: (c, a1, a2) =>
-                      const CuriosityPhoto(rover: Rover.curiosity, earthDate: ''),
+                      const CuriosityPhoto(rover: Rover.curiosity, sol: 200),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: Duration(milliseconds: 800),
@@ -78,7 +80,7 @@ class OpportunityCard extends StatelessWidget {
                 context,
                 PageRouteBuilder(
                   pageBuilder: (c, a1, a2) =>
-                      const CuriosityPhoto(rover: Rover.opportunity, earthDate: ''),
+                      const CuriosityPhoto(rover: Rover.opportunity, sol: 200),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: const Duration(milliseconds: 800),
@@ -139,7 +141,7 @@ class SpiritCard extends StatelessWidget {
                 PageRouteBuilder(
                   pageBuilder: (c, a1, a2) => const CuriosityPhoto(
                     rover: Rover.spirit,
-                    earthDate: '',
+                    sol: 200,
                   ),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),

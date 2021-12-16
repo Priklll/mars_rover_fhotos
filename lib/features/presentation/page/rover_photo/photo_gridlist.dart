@@ -6,11 +6,11 @@ import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/state.dart';
 
 class PhotoCuriosityList extends StatefulWidget {
-  String earthDate;
+  int sol;
 
   PhotoCuriosityList({
     Key? key,
-    required this.earthDate,
+    required this.sol,
   }) : super(key: key);
 
   @override

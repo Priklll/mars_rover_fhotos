@@ -8,9 +8,9 @@ import 'package:photo_from_the_rover/features/service/end_point.dart';
 class NetworkService {
   final NasaEndpoint _endpoint = NasaEndpoint();
 
-  Future<List<Photos>> getPhoto(Rover rover, String earthDate) async {
+  Future<List<Photos>> getPhoto(Rover rover, int sol) async {
     final response =
-        await http.get(Uri.parse("${_endpoint.getPhotoToEarthDateUri(rover, earthDate)}"));
+        await http.get(Uri.parse("${_endpoint.getPhotoToSolUri(rover, sol)}"));
     if (response.statusCode == 200) {
       final List<dynamic> photoJson =
           (jsonDecode(response.body) as Map)['photos'];
