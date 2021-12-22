@@ -9,16 +9,14 @@ import 'package:photo_from_the_rover/features/presentation/page/rover_photo/mani
 import 'package:photo_from_the_rover/features/service/repository.dart';
 
 class CuriosityPhoto extends StatelessWidget {
-  final Rover rover;
-  final int sol;
+  final Repository photoRepository;
 
-  const CuriosityPhoto({Key? key, required this.rover, required this.sol})
+  const CuriosityPhoto({Key? key, required this.photoRepository})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Repository photoRepository = Repository(rover, sol);
-    final PhotoBloc photoBloc = PhotoBloc(photoRepository, rover);
+    final PhotoBloc photoBloc = PhotoBloc(photoRepository);
     photoBloc.add(PhotoLoadEvent());
 
     return BlocProvider<PhotoBloc>(
@@ -27,12 +25,7 @@ class CuriosityPhoto extends StatelessWidget {
           body: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: rover == Rover.curiosity
-                          ? const AssetImage('assets/images/curiosity_bg.png')
-                          : rover == Rover.opportunity
-                              ? const AssetImage(
-                                  'assets/images/opportunity_bg.jpg')
-                              : const AssetImage('assets/images/spirit_bg.jpg'),
+                      image: getBackgroundImage(photoRepository.rover),
                       fit: BoxFit.cover)),
               child: Column(
                 children: [
@@ -41,11 +34,19 @@ class CuriosityPhoto extends StatelessWidget {
                   ),
                   const Expanded(child: ManifestWidget(), flex: 1),
                   Expanded(
-                    child: PhotoCuriosityList(sol: sol),
+                    child: PhotoCuriosityList(),
                     flex: 3,
                   )
                 ],
               ))),
     );
+  }
+
+  AssetImage getBackgroundImage(Rover rover) {
+    switch (rover) {
+      case Rover.curiosity: return const AssetImage('assets/images/curiosity_bg.png');
+      case Rover.opportunity: return const AssetImage('assets/images/opportunity_bg.jpg');
+      case Rover.spirit: return const AssetImage('assets/images/spirit_bg.jpg');
+    }
   }
 }

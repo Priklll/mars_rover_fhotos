@@ -8,9 +8,8 @@ import 'package:photo_from_the_rover/features/service/repository.dart';
 
 class PhotoBloc extends Bloc<RoverEvent, PhotoState> {
   final Repository repository;
-  final Rover rover;
 
-  PhotoBloc(this.repository, this.rover) : super(PhotoStateEmpty());
+  PhotoBloc(this.repository) : super(PhotoStateEmpty());
 
   @override
   Stream<PhotoState> mapEventToState(RoverEvent event) async* {
@@ -28,7 +27,7 @@ class PhotoBloc extends Bloc<RoverEvent, PhotoState> {
       try {
         final RoverManifest _loadedManifestList =
             await repository.getAllManifest();
-        final List<Photos> _loadedPhotoList = await repository.getAllPhoto();
+        final List<Photos> _loadedPhotoList = await repository.getAllPhoto(200);
         yield ManifestAndPhotoLoadedState(
             _loadedPhotoList, _loadedManifestList);
       } catch (error) {}

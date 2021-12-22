@@ -6,13 +6,6 @@ import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/state.dart';
 
 class PhotoCuriosityList extends StatefulWidget {
-  int sol;
-
-  PhotoCuriosityList({
-    Key? key,
-    required this.sol,
-  }) : super(key: key);
-
   @override
   State<PhotoCuriosityList> createState() => _PhotoCuriosityListState();
 }

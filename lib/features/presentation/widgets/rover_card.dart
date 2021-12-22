@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:photo_from_the_rover/features/models/photo.dart';
 import 'package:photo_from_the_rover/features/models/rover.dart';
 import 'package:photo_from_the_rover/features/presentation/page/rover_photo/photo_window.dart';
+import 'package:photo_from_the_rover/features/service/repository.dart';
 
 class CuriosityCard extends StatelessWidget {
 
@@ -10,6 +11,8 @@ class CuriosityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Repository photoRepository = Repository(Rover.curiosity);
+
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 40,
@@ -19,8 +22,7 @@ class CuriosityCard extends StatelessWidget {
             Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (c, a1, a2) =>
-                      const CuriosityPhoto(rover: Rover.curiosity, sol: 200),
+                  pageBuilder: (c, a1, a2) => CuriosityPhoto(photoRepository: photoRepository),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: Duration(milliseconds: 800),
@@ -70,6 +72,8 @@ class OpportunityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Repository photoRepository = Repository(Rover.opportunity);
+
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 40,
@@ -79,8 +83,7 @@ class OpportunityCard extends StatelessWidget {
             Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (c, a1, a2) =>
-                      const CuriosityPhoto(rover: Rover.opportunity, sol: 200),
+                  pageBuilder: (c, a1, a2) => CuriosityPhoto(photoRepository: photoRepository),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: const Duration(milliseconds: 800),
@@ -130,6 +133,8 @@ class SpiritCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Repository photoRepository = Repository(Rover.spirit);
+
     return Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 70,
@@ -139,10 +144,7 @@ class SpiritCard extends StatelessWidget {
             Navigator.push(
                 context,
                 PageRouteBuilder(
-                  pageBuilder: (c, a1, a2) => const CuriosityPhoto(
-                    rover: Rover.spirit,
-                    sol: 200,
-                  ),
+                  pageBuilder: (c, a1, a2) =>  CuriosityPhoto(photoRepository: photoRepository),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: const Duration(milliseconds: 800),
