@@ -13,23 +13,30 @@ class PhotoBloc extends Bloc<RoverEvent, PhotoState> {
 
   @override
   Stream<PhotoState> mapEventToState(RoverEvent event) async* {
-    if (event is PhotoLoadEvent) {
+    if (event is StartManifestLoadingEvent) {
       yield ManifestLoadingState();
+
       try {
         final RoverManifest _loadedManifestList =
-            await repository.getAllManifest();
-        yield PhotoLoadingState(_loadedManifestList);
+        await repository.getAllManifest();
+        add(StartAllPhotosLoadingEvent(_loadedManifestList));
+      } catch (error) {
+        print(error);
+        yield ErrorManifestLoadingState();
+      }
+    }
+
+    if (event is StartAllPhotosLoadingEvent) {
+      yield PhotoLoadingState(event.manifest);
+
+      try {
+        final List<Photos> _loadedPhotoList =
+        await repository.getAllPhoto(event.manifest.maxSol);
+        yield PhotoLoadedState(event.manifest, _loadedPhotoList);
       } catch (error) {
         print(error);
         yield ErrorPhotoLoadingState();
       }
-
-      try {
-        final RoverManifest _loadedManifestList =
-            await repository.getAllManifest();
-        final List<Photos> _loadedPhotoList = await repository.getAllPhoto(200);
-        yield PhotoLoadedState(_loadedPhotoList, _loadedManifestList);
-      } catch (error) {}
     }
   }
 }

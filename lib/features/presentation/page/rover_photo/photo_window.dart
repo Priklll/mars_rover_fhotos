@@ -17,7 +17,7 @@ class CuriosityPhoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PhotoBloc photoBloc = PhotoBloc(photoRepository);
-    photoBloc.add(PhotoLoadEvent());
+    photoBloc.add(StartManifestLoadingEvent());
 
     return BlocProvider<PhotoBloc>(
       create: (context) => photoBloc,

@@ -4,12 +4,20 @@ import 'package:photo_from_the_rover/features/models/rover.dart';
 import 'package:photo_from_the_rover/features/service/network_service.dart';
 
 class Repository {
-  final Rover rover;
   final NetworkService _networkService = NetworkService();
+  final Rover rover;
 
   Repository(this.rover);
 
-  Future<List<Photos>> getAllPhoto(int sol) => _networkService.getPhoto(rover, sol);
-
+  List<Photos> photos = [];
+  
   Future<RoverManifest> getAllManifest() => _networkService.getManifest(rover);
+
+  Future<List<Photos>> getAllPhoto(int sol) async {
+    var photos = await _networkService.getPhoto(rover, sol);
+    for (Photos photo in photos) {
+      this.photos.add(photo);
+    }
+    return this.photos;
+  }
 }
