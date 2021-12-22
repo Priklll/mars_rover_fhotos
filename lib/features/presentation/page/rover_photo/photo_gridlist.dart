@@ -15,88 +15,72 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
   Widget build(BuildContext context) {
     return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, PhotoState state) {
-        if (state is PhotoStateEmpty) {
-          return const IndicatorLoad();
-        }
+        switch (state.runtimeType) {
+          case StartState:
+            return const IndicatorLoad();
 
-        if (state is ManifestStateEmpty) {
-          return const IndicatorLoad();
-        }
+          case ManifestLoadingState:
+            return const IndicatorLoad();
 
-        if (state is PhotoLoadingState) {
-          return const IndicatorLoad();
-        }
+          case ErrorManifestLoadingState: // TODO: Add state UI
+            return Container(
+                margin: const EdgeInsets.only(top: 40),
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 243, 243, 251),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black38, spreadRadius: 10, blurRadius: 30)
+                  ],
+                ),
+                child: const Center(child: Text('Error')));
 
-        if (state is ManifestLoadingState) {
-          return const IndicatorLoad();
-        }
+          case PhotoLoadingState:
+            return const IndicatorLoad();
 
-        if (state is ManifestLoadedState) {
-          return const IndicatorLoad();
-        }
+          case ErrorPhotoLoadingState:
+            return Container(
+                margin: const EdgeInsets.only(top: 40),
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 243, 243, 251),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20)),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black38, spreadRadius: 10, blurRadius: 30)
+                  ],
+                ),
+                child: const Center(child: Text('Error')));
 
-        if (state is PhotoLoadedState) {
-          return Container(
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 243, 243, 251),
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black38, spreadRadius: 10, blurRadius: 30)
-              ],
-            ),
-            margin: const EdgeInsets.only(top: 10),
-            child: GridView.builder(
-                itemCount: state.loadedPhoto.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) {
-                  return ItemBuilder(loadedPhoto: state.loadedPhoto[index]);
-                }),
-          );
-        }
+          case PhotoLoadedState:
+            state as PhotoLoadedState;
 
-        if (state is ManifestAndPhotoLoadedState) {
-          return Container(
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 243, 243, 251),
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20), topLeft: Radius.circular(20)),
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.black38, spreadRadius: 10, blurRadius: 30)
-              ],
-            ),
-            margin: const EdgeInsets.only(top: 10),
-            child: GridView.builder(
-                itemCount: state.loadedPhoto.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemBuilder: (context, index) {
-                  return ItemBuilder(loadedPhoto: state.loadedPhoto[index]);
-                }),
-          );
-        }
-
-        if (state is ErrorPhotoState) {
-          return Container(
-              margin: const EdgeInsets.only(top: 40),
+            return Container(
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 243, 243, 251),
                 borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    topLeft: Radius.circular(20)),
+                    topRight: Radius.circular(20), topLeft: Radius.circular(20)),
                 boxShadow: [
                   BoxShadow(
                       color: Colors.black38, spreadRadius: 10, blurRadius: 30)
                 ],
               ),
-              child: const Center(child: Text('Error')));
+              margin: const EdgeInsets.only(top: 10),
+              child: GridView.builder(
+                  itemCount: state.loadedPhoto.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemBuilder: (context, index) {
+                    return ItemBuilder(loadedPhoto: state.loadedPhoto[index]);
+                  }),
+            );
         }
 
         return const IndicatorLoad();
-      },
+      }
     );
   }
 }

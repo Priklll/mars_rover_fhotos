@@ -9,52 +9,38 @@ import 'package:photo_from_the_rover/features/presentation/widgets/manifest_widg
 
 
 class ManifestWidget extends StatelessWidget {
-  // final Rover rover;
-  // final String earthDate;
-  const ManifestWidget({Key? key,
-    // required this.rover, required this.earthDate
-  }) : super(key: key);
+  const ManifestWidget({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Repository photoRepository = Repository(rover, earthDate);
-    // final PhotoBloc photoBloc = PhotoBloc(photoRepository, rover);
 
     return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, PhotoState state) {
-        if (state is PhotoStateEmpty) {
-          return const ManifestLoadIndicator();
+        switch (state.runtimeType) {
+          case StartState:
+            return const ManifestLoadIndicator();
+
+          case ManifestLoadingState:
+            return const ManifestLoadIndicator();
+
+          case ErrorManifestLoadingState:
+            return const ManifestLoadIndicator(); // TODO: Add state UI
+
+          case PhotoLoadingState:
+            state as PhotoLoadingState;
+
+            return ManifestP(loadedManifest: state.loadedManifest);
+
+          case ErrorPhotoLoadingState:
+            return const ManifestLoadIndicator(); // TODO: Add state UI
+
+          case PhotoLoadedState:
+            state as PhotoLoadedState;
+
+            return ManifestW(loadedManifest: state.loadedManifest, loadedPhoto: state.loadedPhoto);
         }
 
-        if (state is ManifestStateEmpty) {
-          return const ManifestLoadIndicator();
-        }
-
-        if (state is PhotoLoadingState) {
-          return const ManifestLoadIndicator();
-        }
-
-        if (state is ManifestLoadingState) {
-          return const ManifestLoadIndicator();
-        }
-
-        if (state is ManifestLoadedState) {
-          return ManifestP(loadedManifest: state.loadedManifest);
-        }
-
-        if (state is PhotoLoadedState) {
-          return ManifestW(loadedManifest:  state.loadedManifest, loadedPhoto: state.loadedPhoto);
-        }
-
-        if (state is ManifestAndPhotoLoadedState) {
-          return ManifestW(loadedManifest: state.loadedManifest, loadedPhoto: state.loadedPhoto);
-        }
-
-        if (state is ErrorPhotoState) {
-          return const ManifestLoadIndicator();
-        }
-
-        return const CupertinoActivityIndicator();
+        return const CupertinoActivityIndicator(); // TODO: Research about different indicators
       },
     );
   }
