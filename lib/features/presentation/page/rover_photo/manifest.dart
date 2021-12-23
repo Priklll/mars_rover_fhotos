@@ -7,8 +7,8 @@ import 'package:photo_from_the_rover/features/presentation/widgets/manifest_load
 import 'package:photo_from_the_rover/features/presentation/widgets/manifest_widget_state/manifest_and_photo_loaded.dart';
 import 'package:photo_from_the_rover/features/presentation/widgets/manifest_widget_state/manifest_loaded.dart';
 
-
 class ManifestWidget extends StatelessWidget {
+
   const ManifestWidget({Key? key,}) : super(key: key);
 
   @override
@@ -42,8 +42,3 @@ class ManifestWidget extends StatelessWidget {
     );
   }
 }
-
-
-
-
-

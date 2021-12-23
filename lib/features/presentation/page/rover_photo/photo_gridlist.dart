@@ -6,6 +6,7 @@ import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/state.dart';
 
 class PhotoCuriosityList extends StatefulWidget {
+
   @override
   State<PhotoCuriosityList> createState() => _PhotoCuriosityListState();
 }

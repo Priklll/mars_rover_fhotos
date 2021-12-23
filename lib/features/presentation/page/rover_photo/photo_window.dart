@@ -9,9 +9,11 @@ import 'package:photo_from_the_rover/features/presentation/page/rover_photo/mani
 import 'package:photo_from_the_rover/features/service/repository.dart';
 
 class CuriosityPhoto extends StatelessWidget {
+
   final Repository photoRepository;
 
   const CuriosityPhoto({Key? key, required this.photoRepository})
+
       : super(key: key);
 
   @override
