@@ -3,8 +3,6 @@ import 'package:photo_from_the_rover/features/models/photo_manifest.dart';
 
 abstract class PhotoState {}
 
-class StartState extends PhotoState {}
-
 class ManifestLoadingState extends PhotoState {}
 
 class ErrorManifestLoadingState extends PhotoState {}

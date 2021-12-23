@@ -6,7 +6,7 @@ class StartManifestLoadingEvent extends RoverEvent {
   StartManifestLoadingEvent();
 }
 
-class StartAllPhotosLoadingEvent extends RoverEvent {
+class StartLastPhotosLoadingEvent extends RoverEvent {
   final RoverManifest manifest;
-  StartAllPhotosLoadingEvent(this.manifest);
+  StartLastPhotosLoadingEvent(this.manifest);
 }

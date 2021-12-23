@@ -9,7 +9,7 @@ import 'package:photo_from_the_rover/features/service/repository.dart';
 class PhotoBloc extends Bloc<RoverEvent, PhotoState> {
   final Repository repository;
 
-  PhotoBloc(this.repository) : super(StartState());
+  PhotoBloc(this.repository) : super(ManifestLoadingState());
 
   @override
   Stream<PhotoState> mapEventToState(RoverEvent event) async* {
@@ -19,14 +19,14 @@ class PhotoBloc extends Bloc<RoverEvent, PhotoState> {
       try {
         final RoverManifest _loadedManifestList =
         await repository.getAllManifest();
-        add(StartAllPhotosLoadingEvent(_loadedManifestList));
+        add(StartLastPhotosLoadingEvent(_loadedManifestList));
       } catch (error) {
         print(error);
         yield ErrorManifestLoadingState();
       }
     }
 
-    if (event is StartAllPhotosLoadingEvent) {
+    if (event is StartLastPhotosLoadingEvent) {
       yield PhotoLoadingState(event.manifest);
 
       try {

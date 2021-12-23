@@ -17,9 +17,6 @@ class ManifestWidget extends StatelessWidget {
     return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, PhotoState state) {
         switch (state.runtimeType) {
-          case StartState:
-            return const ManifestLoadIndicator();
-
           case ManifestLoadingState:
             return const ManifestLoadIndicator();
 

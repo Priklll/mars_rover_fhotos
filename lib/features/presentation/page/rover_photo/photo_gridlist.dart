@@ -16,9 +16,6 @@ class _PhotoCuriosityListState extends State<PhotoCuriosityList> {
     return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, PhotoState state) {
         switch (state.runtimeType) {
-          case StartState:
-            return const IndicatorLoad();
-
           case ManifestLoadingState:
             return const IndicatorLoad();
 
