@@ -20,7 +20,7 @@ class CuriosityCard extends StatelessWidget {
                 context,
                 PageRouteBuilder(
                   pageBuilder: (c, a1, a2) =>
-                      const CuriosityPhoto(rover: Rover.curiosity, sol: 200),
+                      const CuriosityPhoto(rover: Rover.curiosity),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: Duration(milliseconds: 800),
@@ -80,7 +80,7 @@ class OpportunityCard extends StatelessWidget {
                 context,
                 PageRouteBuilder(
                   pageBuilder: (c, a1, a2) =>
-                      const CuriosityPhoto(rover: Rover.opportunity, sol: 200),
+                      const CuriosityPhoto(rover: Rover.opportunity),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: const Duration(milliseconds: 800),
@@ -141,8 +141,7 @@ class SpiritCard extends StatelessWidget {
                 PageRouteBuilder(
                   pageBuilder: (c, a1, a2) => const CuriosityPhoto(
                     rover: Rover.spirit,
-                    sol: 200,
-                  ),
+                       ),
                   transitionsBuilder: (c, anim, a2, child) =>
                       FadeTransition(opacity: anim, child: child),
                   transitionDuration: const Duration(milliseconds: 800),

@@ -6,13 +6,17 @@ import 'package:photo_from_the_rover/features/models/photo_manifest.dart';
 class ManifestW extends StatelessWidget {
   final RoverManifest loadedManifest;
   final List<Photos> loadedPhoto;
+  final void Function(DateTime date) select;
 
-  const ManifestW({Key? key, required this.loadedManifest, required this.loadedPhoto}) : super(key: key);
+
+  const ManifestW({Key? key, required this.loadedManifest, required this.loadedPhoto, required this.select}) : super(key: key);
+
+
 
   Future<void> _selectDate(BuildContext context) async {
     DateTime selectedDate = DateTime.parse(loadedManifest.maxDate);
 
-    final DateTime? picked = await showRoundedDatePicker(
+    final DateTime? calendar = await showRoundedDatePicker(
         context: context,
         height: 330,
         initialDate: DateTime.parse(loadedManifest.maxDate),
@@ -22,32 +26,13 @@ class ManifestW extends StatelessWidget {
         imageHeader: const AssetImage('assets/images/bg.jpg'),
         borderRadius: 30,
         listDateDisabled: getDates(loadedManifest.photos),
-        textActionButton: 'Update',
-        onTapActionButton: () {
-         //  int index = 0;
-         //  List<Photos> _photo = [];
-         // var photo = loadedPhoto[index].imgSrc;
-         // if (selectedDate == loadedMan)
-
-        }
-
-    );
-
-    if (picked != null && picked != selectedDate) {
-      selectedDate = picked;
+      );
+    if (calendar != null && calendar != selectedDate) {
+      selectedDate = calendar;
       print("Selected date: $selectedDate");
+      select(selectedDate);
     }
   }
-  // photoJson.map((json) => Photos.fromJson(json)).toList();
-  // List<Photos> getPhotoDates(List<dynamic> imgSrc){
-  //   final imgPhoto = imgSrc.map((img) => Photos.fromJson(img.imgSrc)).toList();
-  //   List<Photos> _photo = [];
-  //   Photos photo = imgPhoto.first;
-  //   while (photo != imgPhoto.last){
-  //     if ()
-  //   }
-  //   return
-  // }
 
   
   List<DateTime> getDates(List<ManifestPhotoData> photos) {
@@ -63,16 +48,6 @@ class ManifestW extends StatelessWidget {
     }
     print(_dates.length);
     return _dates;
-
-    // final difference = photosDates.last.difference(photosDates.first).inDays;
-    // for (int i = 0; i < difference; i++) {
-    //  DateTime date2 = DateTime(date.year, date.month, date.day + i);
-    //   if (!photosDates.contains(date2)) {
-    //
-    //     _dates.add(date2);
-    //   }
-    // }
-    // print(_dates.length);
   }
 
   @override

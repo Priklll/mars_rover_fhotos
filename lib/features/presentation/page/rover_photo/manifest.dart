@@ -7,22 +7,21 @@ import 'package:photo_from_the_rover/features/presentation/widgets/manifest_load
 import 'package:photo_from_the_rover/features/presentation/widgets/manifest_widget_state/manifest_and_photo_loaded.dart';
 import 'package:photo_from_the_rover/features/presentation/widgets/manifest_widget_state/manifest_loaded.dart';
 
-
 class ManifestWidget extends StatelessWidget {
-  // final Rover rover;
-  // final String earthDate;
-  const ManifestWidget({Key? key,
-    // required this.rover, required this.earthDate
+  const ManifestWidget({
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Repository photoRepository = Repository(rover, earthDate);
-    // final PhotoBloc photoBloc = PhotoBloc(photoRepository, rover);
+    _onTapButton(DateTime date) {
+      print('callback $date' );
+    }
 
     return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, PhotoState state) {
         if (state is PhotoStateEmpty) {
+
           return const ManifestLoadIndicator();
         }
 
@@ -43,11 +42,17 @@ class ManifestWidget extends StatelessWidget {
         }
 
         if (state is PhotoLoadedState) {
-          return ManifestW(loadedManifest:  state.loadedManifest, loadedPhoto: state.loadedPhoto);
+          return ManifestW(
+              loadedManifest: state.loadedManifest,
+              loadedPhoto: state.loadedPhoto,
+              select: _onTapButton);
         }
 
         if (state is ManifestAndPhotoLoadedState) {
-          return ManifestW(loadedManifest: state.loadedManifest, loadedPhoto: state.loadedPhoto);
+          return ManifestW(
+              loadedManifest: state.loadedManifest,
+              loadedPhoto: state.loadedPhoto,
+              select: _onTapButton);
         }
 
         if (state is ErrorPhotoState) {
@@ -59,8 +64,3 @@ class ManifestWidget extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
