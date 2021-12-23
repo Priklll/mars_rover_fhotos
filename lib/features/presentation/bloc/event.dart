@@ -1,11 +1,17 @@
+import 'package:photo_from_the_rover/features/models/photo_manifest.dart';
+
 abstract class RoverEvent {}
 
-class PhotoLoadEvent extends RoverEvent {
-  PhotoLoadEvent(this.sol);
-  int sol;
+class StartManifestLoadingEvent extends RoverEvent {
+  StartManifestLoadingEvent();
 }
 
+class StartLastPhotosLoadingEvent extends RoverEvent {
+  final RoverManifest manifest;
+  StartLastPhotosLoadingEvent(this.manifest);
+}
 
-class PhotoLoadByDate extends RoverEvent {
-  PhotoLoadByDate();
+class SelectedDateEvent extends RoverEvent {
+  DateTime date;
+  SelectedDateEvent(this.date);
 }

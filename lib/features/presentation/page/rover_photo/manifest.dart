@@ -8,58 +8,36 @@ import 'package:photo_from_the_rover/features/presentation/widgets/manifest_widg
 import 'package:photo_from_the_rover/features/presentation/widgets/manifest_widget_state/manifest_loaded.dart';
 
 class ManifestWidget extends StatelessWidget {
-  const ManifestWidget({
-    Key? key,
-  }) : super(key: key);
+
+  const ManifestWidget({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    _onTapButton(DateTime date) {
-      print('callback $date' );
-    }
 
     return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, PhotoState state) {
-        if (state is PhotoStateEmpty) {
+        switch (state.runtimeType) {
+          case ManifestLoadingState:
+            return const ManifestLoadIndicator();
 
-          return const ManifestLoadIndicator();
+          case ErrorManifestLoadingState:
+            return const ManifestLoadIndicator(); // TODO: Add state UI
+
+          case PhotoLoadingState:
+            state as PhotoLoadingState;
+
+            return ManifestP(loadedManifest: state.loadedManifest);
+
+          case ErrorPhotoLoadingState:
+            return const ManifestLoadIndicator(); // TODO: Add state UI
+
+          case PhotoLoadedState:
+            state as PhotoLoadedState;
+
+            return ManifestW(loadedManifest: state.loadedManifest, loadedPhoto: state.loadedPhoto);
         }
 
-        if (state is ManifestStateEmpty) {
-          return const ManifestLoadIndicator();
-        }
-
-        if (state is PhotoLoadingState) {
-          return const ManifestLoadIndicator();
-        }
-
-        if (state is ManifestLoadingState) {
-          return const ManifestLoadIndicator();
-        }
-
-        if (state is ManifestLoadedState) {
-          return ManifestP(loadedManifest: state.loadedManifest);
-        }
-
-        if (state is PhotoLoadedState) {
-          return ManifestW(
-              loadedManifest: state.loadedManifest,
-              loadedPhoto: state.loadedPhoto,
-              select: _onTapButton);
-        }
-
-        if (state is ManifestAndPhotoLoadedState) {
-          return ManifestW(
-              loadedManifest: state.loadedManifest,
-              loadedPhoto: state.loadedPhoto,
-              select: _onTapButton);
-        }
-
-        if (state is ErrorPhotoState) {
-          return const ManifestLoadIndicator();
-        }
-
-        return const CupertinoActivityIndicator();
+        return const CupertinoActivityIndicator(); // TODO: Research about different indicators
       },
     );
   }

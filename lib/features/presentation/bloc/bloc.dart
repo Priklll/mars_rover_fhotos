@@ -8,32 +8,49 @@ import 'package:photo_from_the_rover/features/service/repository.dart';
 
 class PhotoBloc extends Bloc<RoverEvent, PhotoState> {
   final Repository repository;
-  final Rover rover;
 
-  PhotoBloc(this.repository, this.rover) : super(PhotoStateEmpty());
+  PhotoBloc(this.repository) : super(ManifestLoadingState());
 
   @override
   Stream<PhotoState> mapEventToState(RoverEvent event) async* {
+    if (event is StartManifestLoadingEvent) {
+      yield ManifestLoadingState();
 
-       if (event is PhotoLoadEvent) {
-         event as PhotoLoadEvent ;
-      yield PhotoLoadingState();
       try {
         final RoverManifest _loadedManifestList =
-            await repository.getAllManifest();
-        yield ManifestLoadedState(_loadedManifestList);
+        await repository.getAllManifest();
+        add(StartLastPhotosLoadingEvent(_loadedManifestList));
       } catch (error) {
         print(error);
-        yield ErrorPhotoState();
+        yield ErrorManifestLoadingState();
       }
-      try {
-        final RoverManifest _loadedManifestList =
-            await repository.getAllManifest();
+    }
 
-        final List<Photos> _loadedPhotoList = await repository.getAllPhoto(event.sol);
-        yield ManifestAndPhotoLoadedState(
-            _loadedPhotoList, _loadedManifestList);
-      } catch (error) {}
+    if (event is StartLastPhotosLoadingEvent) {
+      yield PhotoLoadingState(event.manifest);
+
+      try {
+        final List<Photos> _loadedPhotoList =
+        await repository.getAllPhoto(event.manifest.maxSol);
+        yield PhotoLoadedState(event.manifest, _loadedPhotoList);
+      } catch (error) {
+        print(error);
+        yield ErrorPhotoLoadingState();
+      }
+    }
+
+    if (event is SelectedDateEvent) {
+      print('SelectedDateEvent ${event.date}');
+      // yield PhotoLoadingState(event.manifest);
+      //
+      // try {
+      //   final List<Photos> _loadedPhotoList =
+      //   await repository.getAllPhoto(event.manifest.maxSol);
+      //   yield PhotoLoadedState(event.manifest, _loadedPhotoList);
+      // } catch (error) {
+      //   print(error);
+      //   yield ErrorPhotoLoadingState();
+      // }
     }
   }
 }
