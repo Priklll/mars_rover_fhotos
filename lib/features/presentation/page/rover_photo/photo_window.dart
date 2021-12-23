@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
+import 'package:photo_from_the_rover/features/models/photo_manifest.dart';
 import 'package:photo_from_the_rover/features/models/rover.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
 import 'package:photo_from_the_rover/features/presentation/bloc/event.dart';
@@ -9,12 +11,9 @@ import 'package:photo_from_the_rover/features/presentation/page/rover_photo/mani
 import 'package:photo_from_the_rover/features/service/repository.dart';
 
 class CuriosityPhoto extends StatelessWidget {
-
   final Repository photoRepository;
 
-  const CuriosityPhoto({Key? key, required this.photoRepository})
-
-      : super(key: key);
+  const CuriosityPhoto({Key? key, required this.photoRepository}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,5 +49,42 @@ class CuriosityPhoto extends StatelessWidget {
       case Rover.opportunity: return const AssetImage('assets/images/opportunity_bg.jpg');
       case Rover.spirit: return const AssetImage('assets/images/spirit_bg.jpg');
     }
+  }
+
+  Future<void> _selectDate(BuildContext context, RoverManifest manifest, PhotoBloc bloc) async {
+    DateTime selectedDate = DateTime.parse(manifest.maxDate);
+
+    final DateTime? calendar = await showRoundedDatePicker(
+      context: context,
+      height: 330,
+      initialDate: DateTime.parse(manifest.maxDate),
+      firstDate: DateTime.parse(manifest.landingDate),
+      lastDate: DateTime.parse(manifest.maxDate),
+      theme: ThemeData.light(),
+      imageHeader: const AssetImage('assets/images/bg.jpg'),
+      borderRadius: 30,
+      listDateDisabled: getDates(manifest.photos),
+    );
+    if (calendar != null && calendar != selectedDate) {
+      selectedDate = calendar;
+      print("Selected date: $selectedDate");
+
+      bloc.add(SelectedDateEvent(selectedDate));
+    }
+  }
+
+  List<DateTime> getDates(List<ManifestPhotoData> photos) {
+    final photosDates =
+    photos.map((photo) => DateTime.parse(photo.earthDate)).toList();
+    List<DateTime> _dates = [];
+    DateTime date = photosDates.first;
+    while (date != photosDates.last) {
+      if (!photosDates.contains(date)) {
+        _dates.add(date);
+      }
+      date = DateTime(date.year, date.month, date.day + 1);
+    }
+    print(_dates.length);
+    return _dates;
   }
 }

@@ -10,3 +10,8 @@ class StartLastPhotosLoadingEvent extends RoverEvent {
   final RoverManifest manifest;
   StartLastPhotosLoadingEvent(this.manifest);
 }
+
+class SelectedDateEvent extends RoverEvent {
+  DateTime date;
+  SelectedDateEvent(this.date);
+}

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_from_the_rover/features/presentation/widgets/navigator_bar.dart';
 import 'package:photo_from_the_rover/features/presentation/widgets/rover_card.dart';
+import 'package:photo_from_the_rover/features/models/rover.dart';
 
 class RoverList extends StatelessWidget {
   const RoverList({Key? key}) : super(key: key);
@@ -21,15 +22,15 @@ class RoverList extends StatelessWidget {
               child: ListView(
                   padding: EdgeInsets.fromLTRB(24, 140, 24, 50),
                   children: <Widget>[
-                CuriosityCard(),
+                    RoverCard(rover: Rover.curiosity),
                 SizedBox(
                   height: 31,
                 ),
-                OpportunityCard(),
+                    RoverCard(rover: Rover.opportunity),
                 SizedBox(
                   height: 31,
                 ),
-                SpiritCard(),
+                    RoverCard(rover: Rover.spirit),
               ])),
         ));
   }

@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:photo_from_the_rover/features/models/photo.dart';
 import 'package:photo_from_the_rover/features/models/photo_manifest.dart';
+import 'package:photo_from_the_rover/features/presentation/bloc/bloc.dart';
+import 'package:photo_from_the_rover/features/presentation/bloc/event.dart';
 
 class ManifestW extends StatelessWidget {
   final RoverManifest loadedManifest;
   final List<Photos> loadedPhoto;
-  final void Function(DateTime date) select;
 
-
-  const ManifestW({Key? key, required this.loadedManifest, required this.loadedPhoto, required this.select}) : super(key: key);
-
-
+  const ManifestW({Key? key, required this.loadedManifest, required this.loadedPhoto}) : super(key: key);
 
   Future<void> _selectDate(BuildContext context) async {
     DateTime selectedDate = DateTime.parse(loadedManifest.maxDate);
@@ -30,11 +28,11 @@ class ManifestW extends StatelessWidget {
     if (calendar != null && calendar != selectedDate) {
       selectedDate = calendar;
       print("Selected date: $selectedDate");
-      select(selectedDate);
+
+      (context as PhotoBloc).add(SelectedDateEvent(selectedDate));
     }
   }
 
-  
   List<DateTime> getDates(List<ManifestPhotoData> photos) {
     final photosDates =
     photos.map((photo) => DateTime.parse(photo.earthDate)).toList();
@@ -52,6 +50,7 @@ class ManifestW extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Padding(
         padding: const EdgeInsets.only(left: 275),

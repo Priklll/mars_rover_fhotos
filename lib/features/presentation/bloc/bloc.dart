@@ -38,5 +38,19 @@ class PhotoBloc extends Bloc<RoverEvent, PhotoState> {
         yield ErrorPhotoLoadingState();
       }
     }
+
+    if (event is SelectedDateEvent) {
+      print('SelectedDateEvent ${event.date}');
+      // yield PhotoLoadingState(event.manifest);
+      //
+      // try {
+      //   final List<Photos> _loadedPhotoList =
+      //   await repository.getAllPhoto(event.manifest.maxSol);
+      //   yield PhotoLoadedState(event.manifest, _loadedPhotoList);
+      // } catch (error) {
+      //   print(error);
+      //   yield ErrorPhotoLoadingState();
+      // }
+    }
   }
 }
